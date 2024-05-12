@@ -66,4 +66,29 @@ func main() {
 	}
 
 	fmt.Println("Successfully connected!")
+
+	// Create users table if it doesn't exist
+	createTableStatement := `
+        CREATE TABLE IF NOT EXISTS users (
+            id SERIAL PRIMARY KEY,
+            username TEXT NOT NULL,
+            email TEXT NOT NULL
+        )
+    `
+	_, err = db.Exec(createTableStatement)
+	if err != nil {
+		panic(err)
+	}
+
+	// Insert a row into the users table
+	sqlStatement := `
+        INSERT INTO users (username, email)
+        VALUES ($1, $2)
+    `
+	_, err = db.Exec(sqlStatement, "testuser", "testuser@example.com")
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("Successfully inserted!")
 }
