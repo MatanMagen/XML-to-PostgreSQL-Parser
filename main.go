@@ -45,7 +45,7 @@ func main() {
 	}
 
 	// Read the secret data
-	password := secret.Data["POSTGRES_PASSWORD"]
+	password := secret.Data["PGPASSWORD"]
 
 	// Convert password from byte slice to string
 	passwordString := string(password)
