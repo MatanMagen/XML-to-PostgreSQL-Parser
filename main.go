@@ -17,7 +17,7 @@ const (
 	host   = "postgres-service"
 	port   = 5432
 	user   = "postgres"
-	dbname = "my_postgres"
+	dbname = "postgres"
 )
 
 // API client for managing secrets
