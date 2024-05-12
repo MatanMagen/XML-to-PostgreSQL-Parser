@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: parser
+  namespace: default
+  labels:
+    env: test
+    project: parser
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: parser
+  template:
+    metadata:
+      labels:
+        app: parser
+        env: test
+        project: parser
+    spec:
+      containers:
+        - name: parser
+          image: matanmagen/xml-pg-parser:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              cpu: 500m
+              memory: 499Mi
+            requests:
+              cpu: 250m
+              memory: 249Mi
+          envFrom:
+            - secretRef:
+                name: pgpassword
+
+
+        
