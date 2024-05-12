@@ -1,5 +1,5 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: batch/v1
+kind: Job
 metadata:
   name: parser
   namespace: default
@@ -7,10 +7,6 @@ metadata:
     env: test
     project: parser
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: parser
   template:
     metadata:
       labels:
@@ -34,6 +30,4 @@ spec:
           envFrom:
             - secretRef:
                 name: pgpassword
-
-
-        
+      restartPolicy: Never
