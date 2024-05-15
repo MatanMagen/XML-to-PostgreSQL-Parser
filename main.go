@@ -90,6 +90,8 @@ func main() {
 		return
 	}
 
+	fmt.Println(data)
+
 	// The top-level XML element is represented as a map
 	m, ok := data.(map[string]interface{})
 	if !ok {
