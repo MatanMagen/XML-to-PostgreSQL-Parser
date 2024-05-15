@@ -125,35 +125,6 @@ func main() {
 
 	fmt.Println("Successfully inserted!")
 
-	// // Unmarshal the XML into an interface{}
-	// var data Generic_Struct
-	// err = xml.Unmarshal(xmlData, &data)
-	// if err != nil {
-	// 	fmt.Printf("error: %v\n", err)
-	// 	return
-	// }
-	// // Create a map to hold the tag names and values
-	// tagMap := make(map[string]string)
-
-	// // Iterate over the elements and add them to the map
-	// for _, element := range data.Elements {
-	// 	tagMap[element.XMLName.Local] = string(element.Content)
-	// }
-
-	// for _, element := range tagMap {
-	// 	// Insert a row into the users table
-	// 	sqlStatement :=
-	// 	fmt.Sprintf(
-	// 		"INSERT INTO help me here !!!!"
-	// 	)
-	// 	_, err = db.Exec(sqlStatement, "testuser", "testuser@example.com")
-	// 	if err != nil {
-	// 		panic(err)
-	// 	}
-
-	// 	fmt.Println("Successfully inserted!")
-	// }
-
 }
 
 // Function to build a comma-separated list of placeholders
