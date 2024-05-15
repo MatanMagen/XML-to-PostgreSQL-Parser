@@ -21,6 +21,15 @@ const (
 	dbname = "postgres"
 )
 
+type Element struct {
+	XMLName xml.Name
+	Content []byte `xml:",innerxml"`
+}
+
+type Generic_Struct struct {
+	Elements []Element `xml:",any"`
+}
+
 // API client for managing secrets
 var secretsClient coreV1Types.SecretInterface
 
@@ -76,7 +85,7 @@ func main() {
     `)
 
 	// Unmarshal the XML into an interface{}
-	var data map[string]interface{}
+	var data Generic_Struct
 	err = xml.Unmarshal(xmlData, &data)
 	if err != nil {
 		fmt.Printf("error: %v\n", err)
@@ -85,41 +94,9 @@ func main() {
 
 	fmt.Println(data)
 
-	// // The top-level XML element is represented as a map
-	// m, ok := data.(map[string]interface{})
-	// if !ok {
-	// 	fmt.Println("XML data is not a map")
-	// 	return
-	// }
-
-	// // Iterate over the map
-	// for _, value := range m {
-	// 	// Each element is represented as a slice
-	// 	s, ok := value.([]interface{})
-	// 	if !ok {
-	// 		fmt.Println("Element is not a slice")
-	// 		return
-	// 	}
-
-	// 	// Iterate over the slice
-	// 	for _, item := range s {
-	// 		// Each item is represented as a map
-	// 		m, ok := item.(map[string]interface{})
-	// 		if !ok {
-	// 			fmt.Println("Item is not a map")
-	// 			continue
-	// 		}
-
-	// 		// Iterate over the map
-	// 		for key, value := range m {
-	// 			// The text content of the elements is represented as a slice
-	// 			s, ok := value.([]interface{})
-	// 			if ok {
-	// 				fmt.Printf("%s: %v\n", key, s[0])
-	// 			}
-	// 		}
-	// 	}
-	// }
+	for _, element := range data.Elements {
+		fmt.Printf("Element: %s, Content: %s\n", element.XMLName.Local, string(element.Content))
+	}
 
 	// // Insert a row into the users table
 	// sqlStatement := `
