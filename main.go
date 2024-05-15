@@ -114,8 +114,10 @@ func main() {
 		strings.Join(fieldNames, ", "),
 		buildPlaceholders(len(userData)))
 
+	println(sqlStatement)
+
 	// Execute the SQL statement
-	_, err = db.Exec(sqlStatement, values...) // Use ... to unpack the slice
+	_, err = db.Exec(sqlStatement, values...)
 	if err != nil {
 		fmt.Println("Error inserting data:", err)
 		return
