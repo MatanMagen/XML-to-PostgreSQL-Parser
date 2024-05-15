@@ -157,13 +157,10 @@ func main() {
 }
 
 // Function to build a comma-separated list of placeholders
-func buildPlaceholders(length int) string {
-	var placeholders string
-	for i := 0; i < length; i++ {
-		if i > 0 {
-			placeholders += ", "
-		}
-		placeholders += "?"
+func buildPlaceholders(n int) string {
+	placeholders := make([]string, n)
+	for i := 0; i < n; i++ {
+		placeholders[i] = fmt.Sprintf("$%d", i+1)
 	}
-	return placeholders
+	return strings.Join(placeholders, ", ")
 }
