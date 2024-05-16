@@ -74,7 +74,7 @@ func main() {
 		"password=%s dbname=%s sslmode=disable",
 		host, port, user, passwordString, dbname)
 
-	db, err := sql.Open("postgres-bla", psqlInfo)
+	db, err := sql.Open("postgres", psqlInfo)
 	if err != nil {
 		serverLogger.Fatal("can not connect to DB", zap.Error(err))
 	}
