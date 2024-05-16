@@ -31,6 +31,7 @@ type Element struct {
 
 type Generic_Struct struct {
 	Elements []Element `xml:",any"`
+	XMLName  xml.Name
 }
 
 type UserData map[string]interface{}
@@ -88,10 +89,10 @@ func main() {
 	fmt.Println("Successfully connected!")
 
 	xmlData := []byte(`
-        <user>
+        <users>
             <username>MatanMagen111</username>
             <email>Matan@example.com</email>
-        </user>
+        </users>
     `)
 
 	// Unmarshal the XML into Generic_Struct
@@ -101,6 +102,8 @@ func main() {
 		fmt.Printf("error: %v\n", err)
 		return
 	}
+
+	table := data.XMLName.Local
 
 	// Extract user data into a map1
 	userData := make(UserData)
@@ -117,7 +120,8 @@ func main() {
 		fieldNames = append(fieldNames, key)
 		values = append(values, value)
 	}
-	sqlStatement := fmt.Sprintf("INSERT INTO users (%s) VALUES (%s)",
+	sqlStatement := fmt.Sprintf("INSERT INTO (%s) (%s) VALUES (%s)",
+		table,
 		strings.Join(fieldNames, ", "),
 		buildPlaceholders(len(userData)))
 
