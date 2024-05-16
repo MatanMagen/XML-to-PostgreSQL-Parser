@@ -7,11 +7,13 @@ import (
 	"fmt"
 	"strings"
 
+	"go.uber.org/zap"
 	metaV1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	coreV1Types "k8s.io/client-go/kubernetes/typed/core/v1"
 	"k8s.io/client-go/rest"
 
+	"github.com/MatanMagen/XML-to-PostgreSQL-Parser/pkg/log"
 	_ "github.com/lib/pq"
 )
 
@@ -50,11 +52,16 @@ func initClient() {
 
 func main() {
 
+	// Initialize loggers.
+	logLevel := zap.NewAtomicLevelAt(zap.FatalLevel)
+	serverLogger := log.InitializeLogger(logLevel, true, true)
+	defer log.FlushLogger(serverLogger)
+
 	initClient()
 
 	secret, err := secretsClient.Get(context.TODO(), "pgpassword", metaV1.GetOptions{})
 	if err != nil {
-		panic(err)
+		serverLogger.Fatal("can not get secret", zap.Error(err))
 	}
 
 	// Read the secret data
@@ -69,13 +76,13 @@ func main() {
 
 	db, err := sql.Open("postgres", psqlInfo)
 	if err != nil {
-		panic(err)
+		serverLogger.Fatal("can not connect to DB", zap.Error(err))
 	}
 	defer db.Close()
 
 	err = db.Ping()
 	if err != nil {
-		panic(err)
+		serverLogger.Fatal("can not reach DB", zap.Error(err))
 	}
 
 	fmt.Println("Successfully connected!")
