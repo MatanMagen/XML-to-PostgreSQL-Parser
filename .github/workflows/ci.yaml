@@ -24,4 +24,4 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/xml-pg-parser:latest
