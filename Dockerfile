@@ -13,6 +13,4 @@ FROM gcr.io/distroless/static-debian12
 
 COPY --from=build /go/src/app/main /
 
-EXPOSE 1312
-
 CMD ["/main"]
