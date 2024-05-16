@@ -120,7 +120,7 @@ func main() {
 		fieldNames = append(fieldNames, key)
 		values = append(values, value)
 	}
-	sqlStatement := fmt.Sprintf("INSERT INTO (%s) (%s) VALUES (%s)",
+	sqlStatement := fmt.Sprintf("INSERT INTO %s (%s) VALUES (%s)",
 		table,
 		strings.Join(fieldNames, ", "),
 		buildPlaceholders(len(userData)))
