@@ -95,7 +95,7 @@ func main() {
 		return
 	}
 
-	// Extract user data into a map
+	// Extract user data into a map1
 	userData := make(UserData)
 	for _, element := range data.Elements {
 		tagName := element.XMLName.Local
