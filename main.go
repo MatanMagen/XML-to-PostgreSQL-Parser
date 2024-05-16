@@ -125,8 +125,6 @@ func main() {
 		strings.Join(fieldNames, ", "),
 		buildPlaceholders(len(userData)))
 
-	println(sqlStatement)
-
 	// Execute the SQL statement
 	_, err = db.Exec(sqlStatement, values...)
 	if err != nil {
