@@ -26,3 +26,4 @@ jobs:
         with:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/xml-pg-parser:latest
+          platforms: linux/arm64/v8
