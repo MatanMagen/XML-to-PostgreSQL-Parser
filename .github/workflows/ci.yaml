@@ -6,7 +6,7 @@ on:
       - 'main'
 
 jobs:
-  docker_ci:
+  docker_ci_build_and_push:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Docker Buildx
