@@ -120,6 +120,10 @@ func main() {
 		fieldNames = append(fieldNames, key)
 		values = append(values, value)
 	}
+
+	//create users table if not exists
+	_, err = db.Exec("CREATE TABLE IF NOT EXISTS users (username TEXT, email TEXT)")
+
 	sqlStatement := fmt.Sprintf("INSERT INTO %s (%s) VALUES (%s)",
 		table,
 		strings.Join(fieldNames, ", "),
