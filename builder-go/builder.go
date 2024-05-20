@@ -37,7 +37,7 @@ func GenerateStruct(xmlData XMLData) string {
 	return sb.String()
 }
 
-func main() {
+func build_new_struct() {
 	// Open XML file
 	xmlFile, err := os.Open("input.xml")
 	if err != nil {
