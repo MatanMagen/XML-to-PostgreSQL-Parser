@@ -13,7 +13,8 @@ import (
 	coreV1Types "k8s.io/client-go/kubernetes/typed/core/v1"
 	"k8s.io/client-go/rest"
 
-	"github.com/MatanMagen/XML-to-PostgreSQL-Parser/pkg/log"
+	"github.com/MatanMagen/XML-to-PostgreSQL-Parser/log"
+	"github.com/MatanMagen/XML-to-PostgreSQL-Parser/pkg/builder"
 	_ "github.com/lib/pq"
 )
 
@@ -53,6 +54,7 @@ func initClient() {
 
 func main() {
 
+	builder.Build_new_struct()
 	// Initialize loggers.
 	logLevel := zap.NewAtomicLevelAt(zap.FatalLevel)
 	serverLogger := log.InitializeLogger(logLevel, true, true)
